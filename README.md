@@ -8,7 +8,7 @@ For a complete list of values and functional mappings, please visit this page.
 
 These instructions will help you get a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-## Block Diagram
+### Block Diagram
 
 <p align="center"> 
 <img src="https://github.com/bmquiroz/sng/raw/master/sng_arch.png">
