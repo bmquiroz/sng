@@ -1,6 +1,6 @@
 # Server Name Generator Tool
 
-The Server Name Generator (SNG) Tool allows you to create 15 character host names based on the Aon standard naming convention (e.g. NL4DWDPCMS1234). 
+The Server Name Generator (SNG) Tool creates a 15 character hostname based on the Aon standard naming convention (e.g. NL4DWDPCMS1234). The tool stores hostnames, region ID, and service owner ID for traceability. 
 
 For a complete list of values and functional mappings, please visit this page.
 
@@ -24,6 +24,14 @@ The following dependencies must be installed on the Ansible workstation that wil
 - Nginx
 - Python 2.7
 - Supervisor
+- Click 7.0
+- Flask 1.0.2
+- Flask-SQLAlchemy 2.3.2
+- itsdangerous 1.1.0
+- Jinja2 2.10
+- MarkupSafe 1.1.0
+- SQLAlchemy 1.2.14
+- Werkzeug 0.14.1
 ```
 
 ### Directory Structure
@@ -36,7 +44,7 @@ The following dependencies must be installed on the Ansible workstation that wil
 │   ├── routes.py
 │   ├── static
 │   ├── templates
-│   └── test.db
+│   └── data.db
 ├── __pycache__
 │   └── run.cpython-37.pyc
 ├── README.md
