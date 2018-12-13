@@ -64,8 +64,12 @@ The following dependencies must be installed on the Ansible workstation that wil
 Ensure all prerequisites are met. Update playbook parameters. Navigate to `/aws-provision` and execute play:
 
 ```
+mkdir sng_v11
 git clone ssh://git@bitbucket.gxicloud.com:7999/foun/foundry_automations.git
-ansible-playbook site.yml -e "lifecycle=qa cluster=02"
+cd /home/sng/sng_v11
+python3.7 -m venv venv
+source bin/activate
+pip install -r requirements.txt
 ```
 Parameters passed to playbooks are `lifecycle` which represents the environment you are deploying to and `cluster` which represents the cluster.
 
