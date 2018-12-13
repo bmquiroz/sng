@@ -10,7 +10,9 @@ These instructions will help you get a copy of the project up and running on you
 
 ## Block Diagram
 
-
+<p align="center"> 
+<img src="https://github.com/bmquiroz/sng/raw/master/sng_arch.png">
+</p>
 
 ### Prerequisites
 
