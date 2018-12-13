@@ -1,6 +1,6 @@
 # Server Name Generator Tool
 
-The Server Name Generator (SNG) Tool creates a 15 character hostname based on the Aon standard naming convention (e.g. NL4DWDPCMS1234). The tool stores hostnames, region ID, and service owner ID for traceability. 
+The Server Name Generator (SNG) Tool creates 15 character hostnames based on the Aon standard naming convention (e.g. NL4DWDPCMS1234). The tool stores hostnames, region ID, and service owner ID for traceability. 
 
 For a complete list of values and functional mappings, please visit this page.
 
