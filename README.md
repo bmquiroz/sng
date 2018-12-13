@@ -73,6 +73,12 @@ pip install -r requirements.txt
 ```
 Parameters passed to playbooks are `lifecycle` which represents the environment you are deploying to and `cluster` which represents the cluster.
 
+## TODO
+
+* To run for all modules
+* To run for all modules
+* To run for all modules
+
 ## Contributing
 
 WIP
