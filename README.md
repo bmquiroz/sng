@@ -16,7 +16,7 @@ These instructions will help you get a copy of the project up and running on you
 
 ### Prerequisites
 
-The following dependencies must be installed on the Ansible workstation that will be used to deploy swarm clusters. 
+The following dependencies must be installed on the web server. 
 
 ```
 - Python 3.7.0
@@ -61,17 +61,16 @@ The following dependencies must be installed on the Ansible workstation that wil
 
 ### Installation
 
-Ensure all prerequisites are met. Update playbook parameters. Navigate to `/aws-provision` and execute play:
+Ensure all prerequisites are met before creating the directory structure. 
 
 ```
 mkdir sng_v11
-git clone ssh://git@bitbucket.gxicloud.com:7999/foun/foundry_automations.git
-cd /home/sng/sng_v11
+git clone repo
 python3.7 -m venv venv
 source bin/activate
 pip install -r requirements.txt
+...
 ```
-Parameters passed to playbooks are `lifecycle` which represents the environment you are deploying to and `cluster` which represents the cluster.
 
 ## TODO
 
@@ -79,6 +78,8 @@ Parameters passed to playbooks are `lifecycle` which represents the environment 
 * Redesign to fit Flask blueprint model
 * Move SQLite to MySQL
 * Enable OAuth for SSO integration
+* Improve database table output, add ModelView for CRUD operations
+* Add Flask-API
 
 ## Contributing
 
