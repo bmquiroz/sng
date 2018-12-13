@@ -75,9 +75,10 @@ Parameters passed to playbooks are `lifecycle` which represents the environment 
 
 ## TODO
 
-* To run for all modules
-* To run for all modules
-* To run for all modules
+* Dockerize services and automate build through Compose or Puppet
+* Redesign to fit Flask blueprint model
+* Move SQLite to MySQL
+* Enable OAuth for SSO integration
 
 ## Contributing
 
