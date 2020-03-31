@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Host Names</title>
+</head>
+<body>
+<form method="POST" action="/home">
+    <button type="submit">Get all Hostnames</button><br>
+    <button type="submit" formaction="/add_host">Insert new Hostname</button>
+     <table style="width:100%">
+      <!-- table header -->
+      {% if results %}
+      <tr>
+         {% for key in results[0] %}
+         <th> {{ key }} </th>
+         {% endfor %}
+      </tr>
+      {% endif %}
+
+      <!-- table rows -->
+      {% for dict_item in results %}
+      <tr>
+         {% for value in dict_item.values() %}
+         <td> {{ value }} </td>
+         {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="{{ url_for('logout') }}">Log Out</a>
+</form>
+</body>
+</html>

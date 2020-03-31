@@ -1,0 +1,56 @@
+<html>
+   <body>
+
+      <form action="/create_string" method="post">
+         Region:
+         <select name="region">
+           <option value="North America">North America</option>
+           <option value="Asia">Asia</option>
+           <option value="Europe">Europe</option>
+           <option value="Australia">Australia</option>
+         </select>
+         Location:
+         <select name="location">
+           <option value="Mumbai">Mumbai</option>
+           <option value="Bangalore">Bangalore</option>
+           <option value="Pune">Pune</option>
+           <option value="Delhi">Delhi</option>
+         </select>
+         OS:
+         <select name="os">
+           <option value="Unix">Unix</option>
+           <option value="Windows">Windows</option>
+           <option value="Macintosh">Macintosh</option>
+           <option value="Android">Android</option>
+         </select>
+         Zone:
+         <select name="zone">
+           <option value="Zone1">Zone1</option>
+           <option value="Zone2">Zone2</option>
+           <option value="Zone3">Zone3</option>
+           <option value="Zone4">Zone4</option>
+         </select>
+         Lifecycle:
+         <select name="lifecycle">
+           <option value="Lifecycle1">Lifecycle1</option>
+           <option value="Lifecycle2">Lifecycle2</option>
+           <option value="Lifecycle3">Lifecycle3</option>
+           <option value="Lifecycle4">Lifecycle4</option>
+         </select>
+         Role:
+         <select name="role">
+           <option value="Tester">Tester</option>
+           <option value="Developer">Developer</option>
+           <option value="Architect">Architect</option>
+           <option value="QA">QA</option>
+         </select>
+          Service owner:
+          <input type="text" name="service_owner">
+         <p><input type = "submit" value = "submit" /></p>
+          <p>{{ name_string }}</p>
+         <button type="submit" formaction="/home">Get all Hostnames</button>
+         <a href="{{ url_for('logout') }}">Log Out</a>
+      </form>
+
+   </body>
+</html>
