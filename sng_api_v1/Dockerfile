@@ -53,6 +53,8 @@ RUN mkdir -p /var/log/sng
 
 # Configure Supervisor
 COPY supervisord.conf /etc
+RUN systemctl start supervisord
+RUN unlink /tmp/supervisor.sock
 RUN supervisorctl update
 RUN supervisorctl status all
 
