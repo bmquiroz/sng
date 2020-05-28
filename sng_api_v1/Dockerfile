@@ -58,6 +58,7 @@ RUN pip2.7 install supervisor
 RUN echo_supervisord_conf
 RUN echo_supervisord_conf > /etc/supervisord.conf
 RUN supervisord -c /etc/supervisord.conf
+RUN supervisorctl -c /etc/supervisord.conf
 RUN mkdir -p /var/log/sng
 
 # Configure Supervisor
