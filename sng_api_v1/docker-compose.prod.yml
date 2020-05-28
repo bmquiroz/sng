@@ -2,8 +2,8 @@ version: '3.7'
 
 services:
   web:
+    container_name: production_nginx
     build:
-      container_name: production_nginx
       context: ./app
       dockerfile: Dockerfile.prod
     command: gunicorn name_string_api:app -b 0.0.0.0:5000
@@ -19,8 +19,8 @@ services:
     # depends_on:
     #   - db
   nginx:
-    build: ./nginx
     container_name: production_sng_api
+    build: ./nginx
     # volumes:
     #   - static_volume:/home/app/web/staticfiles
     #   - media_volume:/home/app/web/mediafiles
