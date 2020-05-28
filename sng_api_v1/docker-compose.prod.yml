@@ -2,7 +2,8 @@ version: '3.7'
 
 services:
   web:
-    container_name: production_nginx
+    container_name: production_sng_api
+    image: production_sng_api
     build:
       context: ./app
       dockerfile: Dockerfile.prod
@@ -19,7 +20,8 @@ services:
     # depends_on:
     #   - db
   nginx:
-    container_name: production_sng_api
+    container_name: production_nginx
+    image: production_nginx
     build: ./nginx
     # volumes:
     #   - static_volume:/home/app/web/staticfiles
@@ -27,7 +29,7 @@ services:
     networks:
       - sng_network
     ports:
-      - 1337:80
+      - 5000:80
     depends_on:
       - web
 
