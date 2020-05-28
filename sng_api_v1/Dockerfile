@@ -21,7 +21,7 @@ RUN rm -f /usr/src/Python-3.7.0.tgz
 # Set up env
 WORKDIR /home/sng/sng_api_v1
 ENV VIRTUAL_ENV=/home/sng/sng_api_v1/venv
-RUN python3.7 -m venv --python=/usr/bin/python3 $VIRTUAL_ENV
+RUN python3.7 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 COPY . /home/sng/sng_api_v1
 RUN pip install -r requirements_dev.txt
