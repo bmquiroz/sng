@@ -31,7 +31,6 @@ RUN pip install gunicorn
 RUN yum install -y epel-release
 RUN yum install -y nginx
 COPY nginx.conf /etc/nginx/
-RUN gunicorn --bind 0.0.0.0:5000 name_string_api:app
 
 # Install Python and Pip 2.7 (for Supervisor)
 RUN yum install -y gcc
