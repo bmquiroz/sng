@@ -39,37 +39,11 @@ RUN pip install -r requirements_dev.txt
 
 # Install web services
 RUN pip install gunicorn  
-RUN yum install -y epel-release
-
-# Install Python and Pip 2.7 (for Supervisor)
-RUN yum install -y gcc
-WORKDIR /usr/src
-RUN wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
-RUN tar xzf Python-2.7.10.tgz
-WORKDIR /usr/src/Python-2.7.10
-RUN ./configure
-RUN make altinstall
-WORKDIR /tmp
-RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-RUN python2.7 get-pip.py
-
-# Install Supervisor
-RUN pip2.7 install supervisor
-RUN echo_supervisord_conf
-RUN echo_supervisord_conf > /etc/supervisord.conf
-RUN supervisord -c /etc/supervisord.conf
-RUN supervisorctl -c /etc/supervisord.conf
-RUN mkdir -p /var/log/sng
-
-# Configure Supervisor
-COPY supervisord.conf /etc
-RUN touch /tmp/supervisor.sock
-# RUN unlink /tmp/supervisor.sock
-RUN supervisorctl update
-RUN supervisorctl status all
+WORKDIR /home/sng/sng_api_v1
 
 # Update dirs
 RUN chown -R sng:sng /home/sng
 RUN chmod 710 /home/sng
 
-# CMD ["/usr/local/bin/supervisord"]
+# Start services
+ENTRYPOINT ["./gunicorn_starter.sh"]
