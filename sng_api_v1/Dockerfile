@@ -1,7 +1,7 @@
 FROM centos:centos7
 
 RUN adduser sng
-RUN echo "sng:A0n0220!" | chpasswd
+RUN echo "" | chpasswd
 RUN usermod -aG wheel sng
 RUN mkdir -p /home/sng/sng_api_v1
 
