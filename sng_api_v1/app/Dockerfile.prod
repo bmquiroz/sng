@@ -1,7 +1,5 @@
 FROM centos:centos7
 
-EXPOSE 5000
-
 RUN adduser sng
 RUN echo "" | chpasswd
 RUN usermod -aG wheel sng
@@ -37,5 +35,6 @@ RUN chown -R sng:sng /home/sng
 RUN chmod 710 /home/sng
 
 # Start services
+EXPOSE 5000
 RUN ["chmod", "+x", "./gunicorn_starter.sh"]
 ENTRYPOINT ["./gunicorn_starter.sh"]
