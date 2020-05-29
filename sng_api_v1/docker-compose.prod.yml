@@ -7,7 +7,7 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile.prod
-    command: gunicorn name_string_api:app -b 0.0.0.0:5000
+    # command: gunicorn name_string_api:app -b 0.0.0.0:5000
     # volumes:
     #   - static_volume:/home/app/web/staticfiles
     #   - media_volume:/home/app/web/mediafiles
