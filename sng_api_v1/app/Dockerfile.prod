@@ -1,5 +1,7 @@
 FROM centos:centos7
 
+EXPOSE 5000
+
 RUN adduser sng
 RUN echo "" | chpasswd
 RUN usermod -aG wheel sng
