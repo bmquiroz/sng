@@ -7,6 +7,9 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile.prod
+    # environment:
+    #   MYSQL_DATABASE: rds_endpoint
+    #   MYSQL_ROOT_PASSWORD: your_password
     # command: gunicorn name_string_api:app -b 0.0.0.0:5000
     # volumes:
     #   - static_volume:/home/app/web/staticfiles
