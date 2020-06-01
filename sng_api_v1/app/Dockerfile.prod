@@ -5,7 +5,7 @@ ARG DB_ENDPOINT
 ARG DB_CREDS
 
 RUN adduser sng
-RUN echo ${SVC_CREDS} | chpasswd
+RUN echo $SVC_CREDS | chpasswd
 RUN usermod -aG wheel sng
 RUN mkdir -p /home/sng/sng_api_v1
 
