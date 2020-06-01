@@ -1,7 +1,11 @@
 FROM centos:centos7
 
+ARG SVC_CREDS
+ARG DB_ENDPOINT
+ARG DB_CREDS
+
 RUN adduser sng
-RUN echo "" | chpasswd
+RUN echo "${SVC_CREDS}" | chpasswd
 RUN usermod -aG wheel sng
 RUN mkdir -p /home/sng/sng_api_v1
 
