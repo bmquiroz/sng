@@ -1,10 +1,6 @@
 FROM centos:centos7
 
 ARG SVC_CREDS
-ARG DB_ENDPOINT
-ARG DB_CREDS
-
-ENV DB_ENDPOINT=$DB_ENDPOINT
 
 RUN adduser sng
 RUN echo "$SVC_CREDS | chpasswd"
