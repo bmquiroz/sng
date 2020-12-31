@@ -37,9 +37,9 @@ app.config['LDAP_GROUP_OBJECT_FILTER'] = '(objectclass=group)'
 app.config['LDAP_GROUP_MEMBERS_ATTR'] = 'member'
 app.config['LDAP_GROUP_SEARCH_SCOPE'] = 'SUBTREE'
 # app.config['LDAP_BIND_DIRECT_CREDENTIALS'] = 'True'
-app.config['LDAP_BIND_USER_DN'] = 'svc-sngauth@AONNET.AON.NET'
+app.config['LDAP_BIND_USER_DN'] = ''
 app.config['LDAP_BIND_AUTHENTICATION_TYPE'] = 'SIMPLE'
-app.config['LDAP_BIND_USER_PASSWORD'] = 'vx36TTXBhATeCezy'
+app.config['LDAP_BIND_USER_PASSWORD'] = ''
 
 
 login_manager = LoginManager(app) # Setup a Flask-Login Manager
