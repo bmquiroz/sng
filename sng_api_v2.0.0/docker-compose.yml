@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+
+  backend:
+    container_name: sng-backend
+    image: sng-backend:2.0.0
+    build:
+      context: ./backend-app
+      dockerfile: Dockerfile
+    networks:
+      - sng-network
+
+  frontend:
+    container_name: sng-frontend
+    image: sng-frontend:2.0.0
+    build:
+      context: ./frontend-app
+      dockerfile: Dockerfile
+    networks:
+      - sng-network
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+
+networks:
+
+  sng-network:
