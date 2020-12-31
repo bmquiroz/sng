@@ -1,9 +1,5 @@
 FROM centos:centos7
 
-# ENV http_proxy http://builder:K33pSecret@internal-EUIEO-INT-ELB-COMMON-896878853.eu-west-1.elb.amazonaws.com:3228
-# ENV https_proxy http://builder:K33pSecret@internal-EUIEO-INT-ELB-COMMON-896878853.eu-west-1.elb.amazonaws.com:3228
-# ENV no_proxy=localhost,127.0.0.1,169.254.169.254,.aon.com,.aon.net,.ie.aon.bz
-
 ARG SVC_CREDS
 
 RUN adduser sng
