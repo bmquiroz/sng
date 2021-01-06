@@ -3,17 +3,25 @@ version: '3.7'
 services:
 
   backend:
+    restart: always
     container_name: sng-backend
-    image: sng-backend:2.0.0
+    image: sng-backend:${TAG}
     build:
-      context: ./backend-app
+      context: ./backend-app/app
       dockerfile: Dockerfile
     networks:
       - sng-network
+    # expose:
+    #   - 5000
+    ports:
+      - 5000:5000
+    env_file:
+      - ./backend.env
 
   frontend:
+    restart: always
     container_name: sng-frontend
-    image: sng-frontend:2.0.0
+    image: sng-frontend:${TAG}
     build:
       context: ./frontend-app
       dockerfile: Dockerfile
@@ -21,6 +29,11 @@ services:
       - sng-network
     ports:
       - 80:80
+      # - 443:443
+    env_file:
+      - ./frontend.env
+    # volumes: 
+    #   - /data/certs:/etc/nginx/certs
     depends_on:
       - backend
 

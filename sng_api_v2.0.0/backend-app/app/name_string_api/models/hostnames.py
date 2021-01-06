@@ -2,6 +2,7 @@ from name_string_api.database_utility import db
 
 
 class HostName(db.Model):
+    __tablename__ = 'host_name'
     id = db.Column(db.Integer, primary_key=True)
     # service_owner = db.Column('SERVICE_OWNER', db.String(50), nullable=False)
     description = db.Column('DESCRIPTION', db.String(50), nullable=False)

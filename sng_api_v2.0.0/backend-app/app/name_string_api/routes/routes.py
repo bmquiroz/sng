@@ -1,5 +1,6 @@
 import sys
 import json
+import os
 from name_string_api import app
 from name_string_api.models.users import User
 from name_string_api.service import user_service as user_svc
@@ -22,24 +23,26 @@ logging.getLogger('flask_ldap3_login').setLevel(logging.DEBUG)
 logging.basicConfig()
 
 
-# app.config['DEBUG'] = True
-app.config['LDAP_HOST'] = 'aonnet.aon.net'
-app.config['LDAP_BASE_DN'] = 'DC=aonnet,DC=aon,DC=net'
-# app.config['LDAP_USER_DN'] = 'OU=Users,OU=USA,OU=ACCOUNTS,OU=NA,OU=Regions'
-app.config['LDAP_USER_DN'] = 'OU=Regions'
+ldap_host = os.environ['LDAP_HOST']
+ldap_bind_user_password = os.environ['LDAP_BIND_USER_PASSWORD']
+
+
+app.config['DEBUG'] = True
+app.config['LDAP_HOST'] = ldap_host
+app.config['LDAP_BASE_DN'] = 'DC=home,DC=redchip,DC=net'
+app.config['LDAP_USER_DN'] = 'OU=NJ'
 app.config['LDAP_USER_LOGIN_ATTR'] = 'cn'
-app.config['LDAP_USER_RDN_ATTR'] = 'sAMAccountName'
-app.config['LDAP_USER_OBJECT_FILTER'] = '(objectclass=user)'
+app.config['LDAP_USER_RDN_ATTR'] = 'CN'
+app.config['LDAP_USER_OBJECT_FILTER'] = '(objectclass=person)'
 app.config['LDAP_USER_SEARCH_SCOPE'] = 'SUBTREE'
 app.config['LDAP_SEARCH_FOR_GROUPS'] = 'True'
-app.config['LDAP_GROUP_DN'] = 'CN=AG-sng-admins,OU=USA,OU=Groups,OU=NA,OU=Regions'
+app.config['LDAP_GROUP_DN'] = 'CN=SNG_Users,OU=Groups,OU=NJ'
 app.config['LDAP_GROUP_OBJECT_FILTER'] = '(objectclass=group)'
 app.config['LDAP_GROUP_MEMBERS_ATTR'] = 'member'
 app.config['LDAP_GROUP_SEARCH_SCOPE'] = 'SUBTREE'
-# app.config['LDAP_BIND_DIRECT_CREDENTIALS'] = 'True'
-app.config['LDAP_BIND_USER_DN'] = ''
+app.config['LDAP_BIND_USER_DN'] = 'CN=Administrator,CN=Users,DC=home,DC=redchip,DC=net'
 app.config['LDAP_BIND_AUTHENTICATION_TYPE'] = 'SIMPLE'
-app.config['LDAP_BIND_USER_PASSWORD'] = ''
+app.config['LDAP_BIND_USER_PASSWORD'] = ldap_bind_user_password
 
 
 login_manager = LoginManager(app) # Setup a Flask-Login Manager
@@ -63,7 +66,7 @@ def main():
     return render_template('index.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['GET', 'POST'])
 def login():
 
     if request.method == 'POST':
@@ -106,7 +109,7 @@ def login():
                         # Generates the JWT token using flask_jwt_extended
                         access_token = create_access_token(identity=username)
                         response = make_response(jsonify({"access_token": access_token}), 200)
-                        response.headers.add('Access-Control-Allow-Origin', 'http://10.243.149.31:80')
+                        response.headers.add('Access-Control-Allow-Origin', 'http://sng.home.redchip.net')
                         return response
                         
                         # Print JWT token
@@ -117,7 +120,7 @@ def login():
                         user = User(user_id)
                         login_user(user, remember=True)
                         response = jsonify({"response":'Login successful'})
-                        response.headers.add('Access-Control-Allow-Origin', 'http://10.243.149.31:80')
+                        response.headers.add('Access-Control-Allow-Origin', 'http://sng.home.redchip.net')
                         return response
                 else:
                     return jsonify({"response":'Login not successful'})

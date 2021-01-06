@@ -14,7 +14,7 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/get_hostnames', methods=['POST', 'GET'])
+@app.route('/api/get_hostnames', methods=['POST', 'GET'])
 @cross_origin()
 def get_hostnames():
     if request.method == 'POST':
@@ -59,12 +59,12 @@ def query_host():
     return render_template('query_host.html')
 
 
-@app.route('/create_string', methods=['POST', 'GET'])
+@app.route('/api/create_string', methods=['POST', 'GET'])
 def create_sting():
     if request.method == 'POST':
         hostname_string = hostname_svc.insert_hostname(request.form)
         response = make_response(jsonify({"host_name": hostname_string}), 200)
-        response.headers.add('Access-Control-Allow-Origin', 'http://10.243.149.31:80')
+        response.headers.add('Access-Control-Allow-Origin', 'http://sng.home.redchip.net')
         return response
 
 
