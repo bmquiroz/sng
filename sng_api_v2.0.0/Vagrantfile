@@ -2,6 +2,7 @@
 # vi: set ft=ruby :
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/xenial64"
+  config.vm.synced_folder ".", "/repo/sng/"
   config.vm.network "private_network", ip: "192.168.10.101"
   config.vm.provider "virtualbox" do |vb|
     vb.memory = 2048
@@ -9,5 +10,9 @@ Vagrant.configure(2) do |config|
   end
   config.vm.provision "shell", inline: <<-SHELL
     wget -qO- https://get.docker.com/ | sh
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    cd /repo/sng/
+    sudo docker-compose -f docker-compose.yml up -d --build
   SHELL
 end
