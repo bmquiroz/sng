@@ -1,0 +1,159 @@
+<mat-toolbar color="primary" class="app-header">
+    <div class="header" target="_blank">
+        <header><img src="assets/images/logo2.png" width="200" height="50" alt="" />
+            <a href=""> </a>
+        </header>
+    </div>
+    <div class=menu-bar>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/landing">
+                <mat-icon>home</mat-icon>
+                <span>Home</span>
+            </button>
+            <button (click)="logout()" mat-menu-item routerLink="/">
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Log off</span>
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>
+
+<div class="main-div">
+    <mat-card>
+        <div [hidden]="submitted">
+            <mat-card-subtitle class="gen-title">Select all appropriate values and click submit when done.
+            </mat-card-subtitle>
+            <form #addhostForm="ngForm" (ngSubmit)="addhost(addhostForm)">
+                <div class="gen-panel">
+                    <mat-card-content>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Region</mat-label>
+                            <mat-select [(value)]="selectedRegion">
+                                <mat-option [value]="option.value" *ngFor="let option of region">{{ option.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- <p>You selected: {{selectedRegion}}</p> -->
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Location</mat-label>
+                            <mat-select [(value)]="selectedLocation">
+                                <mat-option [value]="option.value" *ngFor="let option of location">
+                                    {{ option.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- <p>You selected: {{selectedLocation}}</p> -->
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>OS</mat-label>
+                            <mat-select [(value)]="selectedOS">
+                                <mat-option [value]="option.value" *ngFor="let option of os">{{ option.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- <p>You selected: {{selectedOS}}</p> -->
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Zone</mat-label>
+                            <mat-select [(value)]="selectedZone">
+                                <mat-option [value]="option.value" *ngFor="let option of zone">{{ option.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- <p>You selected: {{selectedZone}}</p> -->
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Lifecycle</mat-label>
+                            <mat-select [(value)]="selectedLifecycle">
+                                <mat-option [value]="option.value" *ngFor="let option of lifecycle">
+                                    {{ option.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- <p>You selected: {{selectedLifecycle}}</p> -->
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Role</mat-label>
+                            <mat-select [(value)]="selectedRole">
+                                <mat-option [value]="option.value" *ngFor="let option of role">{{ option.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- <p>You selected: {{selectedRole}}</p> -->
+
+                        <form class="appid-form">
+                            <mat-form-field class="example-full-width" color="accent">
+                                <mat-label>App ID</mat-label>
+                                <input matInput [formControl]="appIdFormControl" placeholder="Ex. A000000">
+                                <mat-error
+                                    *ngIf="appIdFormControl.hasError('appId') && !appIdFormControl.hasError('required')">
+                                    Please enter a valid App ID
+                                </mat-error>
+                                <mat-error *ngIf="appIdFormControl.hasError('required')">
+                                    App ID is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </form>
+                        <form class="description-form">
+                            <mat-form-field class="example-full-width" color="accent">
+                                <mat-label>Description</mat-label>
+                                <input matInput [formControl]="descriptionFormControl" placeholder="Ex. CEPS application server">
+                                <mat-error
+                                    *ngIf="descriptionFormControl.hasError('description') && !descriptionFormControl.hasError('required')">
+                                    Please enter a valid description
+                                </mat-error>
+                                <mat-error *ngIf="descriptionFormControl.hasError('required')">
+                                    Description is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </form>
+                    </mat-card-content>
+                </div>
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" type="submit"
+                        [disabled]="!addhostForm.form.valid">Submit</button>
+                </mat-card-actions>
+            </form>
+        </div>
+
+        <div [hidden]="!submitted">
+            <mat-card-subtitle class="gen-results">
+            </mat-card-subtitle>
+            <h2>You submitted the following details:</h2>
+            <br>
+            <div class="row">
+                <p>Region you selected: {{ selectedRegion }}</p>
+            </div>
+            <div class="row">
+                <p>Location you selected: {{ selectedLocation }}</p>
+            </div>
+            <div class="row">
+                <p>OS you selected: {{ selectedOS }}</p>
+            </div>
+            <div class="row">
+                <p>Zone you selected: {{ selectedZone }}</p>
+            </div>
+            <div class="row">
+                <p>Lifecyle you selected: {{ selectedLifecycle }}</p>
+            </div>
+            <div class="row">
+                <p>Role you selected: {{ selectedRole }}</p>
+            </div>
+            <div class="row">
+                <p>App ID you entered: {{ appIdFormControl.value }}</p>
+            </div>
+            <div class="row">
+                <p>The description you entered: {{ descriptionFormControl.value }}</p>
+            </div>
+            <div class="row" *ngFor="let item of items">
+                <p>Host name that has been created: {{ item }}</p>
+            </div>
+            <br>
+            <button mat-raised-button color="accent" (click)="submitted=false">Back</button>
+        </div>
+    </mat-card>
+</div>

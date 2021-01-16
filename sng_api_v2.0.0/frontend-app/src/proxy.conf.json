@@ -1,0 +1,7 @@
+{
+    "/add_host*": {
+        "target": "http://10.0.0.144:80",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

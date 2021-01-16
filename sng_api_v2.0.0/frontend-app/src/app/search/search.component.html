@@ -1,0 +1,62 @@
+<mat-toolbar color="primary" class="app-header">
+  <div class="header" target="_blank">
+    <header><img src="assets/images/logo2.png" width="200" height="50" alt="" />
+      <a href=""> </a>
+    </header>
+  </div>
+  <div class=menu-bar>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/landing">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button (click)="logout()" mat-menu-item routerLink="/">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Log off</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<div class="main-div">
+  <mat-card>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. NCLAVNIWEB00001" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+        <ng-container matColumnDef="hostname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Host Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.hostname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="app_id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> App ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.app_id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="region">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Region </th>
+          <td mat-cell *matCellDef="let element"> {{element.region}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </mat-card>
+</div>

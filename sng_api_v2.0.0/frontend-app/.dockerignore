@@ -1,0 +1,2 @@
+# Ignore node modules from Docker build
+/node_modules

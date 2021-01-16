@@ -1,0 +1,87 @@
+.menu-bar {
+  display: inline-block;
+  padding-left: 6px;
+}
+
+mat-card {
+  text-align: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  display: flex;
+  flex: 50%;
+  padding: 10px;
+  text-align: center;
+  flex-direction: column;
+  background: white;
+  color: black;
+  margin-right: 10px;
+  align-items: center;
+  font-size: 14px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.outlook {
+  display: flex;
+  flex: 50%;
+  padding: 10px;
+  text-align: center;
+  flex-direction: column;
+  background: white;
+  color: black;
+  margin-right: 10px;
+  align-items: center;
+  font-size: 14px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.tool-images {
+  margin-bottom: 50%;
+}
+
+.main-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.button-flex-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.nowrap {
+  white-space: nowrap;
+  margin-bottom: 5%;
+  margin-top: 1%;
+  height: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.title-box {
+  font-size: 15px;
+  line-height: 28px;
+  margin: 15px 5px;
+  width: 700px;
+  word-wrap: break-word;
+}
+
+.h1 {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 56px;
+  margin: 15px 5px;
+}

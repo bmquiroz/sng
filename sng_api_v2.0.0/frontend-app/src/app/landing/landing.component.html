@@ -1,0 +1,51 @@
+<mat-toolbar color="primary" class="app-header">
+    <div class="header" target="_blank">
+        <header><img src="assets/images/logo2.png" width="200" height="50" alt="" />
+            <a href=""> </a>
+        </header>
+    </div>
+    <div class=menu-bar>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/landing">
+                <mat-icon>home</mat-icon>
+                <span>Home</span>
+            </button>
+            <button (click)="logout()" mat-menu-item routerLink="/">
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Log off</span>
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>
+
+<div class="main-div">
+    <mat-card>
+        <img src="assets/images/name_generation.png" />
+        <mat-card-subtitle class="title-box">The Server Name Generator Tool creates host names based on the Aon standard
+            naming convention. <br> For a complete list of values and functional mappings,
+            please visit this page.</mat-card-subtitle>
+        <mat-divider [inset]="true"></mat-divider>
+        <mat-card-content>
+            <div class="flex-row">
+                <div class="container">
+                    <span class="nowrap">Generate a host name</span>
+                    <div class="container">
+                        <img class="tool-images" src="assets/images/gear2.png" />
+                    </div>
+                    <button mat-raised-button (click)="generate()" color="accent">Generate</button>
+                </div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <div class="outlook">
+                    <span class="nowrap">Search for a host name</span>
+                    <div class="container">
+                        <img class="tool-images" src="assets/images/search2.png" />
+                    </div>
+                    <button mat-raised-button (click)="search()" color="accent">Search</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

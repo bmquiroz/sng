@@ -1,0 +1,50 @@
+@import "~@angular/material/theming";
+
+/* ======== Angular material custom fonts ======== */
+$custom-typography: mat-typography-config(
+  $font-family: "Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif",
+);
+
+// Include non-theme styles for core.
+@include mat-core($custom-typography);
+
+/* Color definitions */
+$mat-custom-primary: (
+  50: white,
+  100: white,
+  200: white,
+  300: white,
+  400: white,
+  500: white,
+  600: white,
+  700: white,
+  800: white,
+  900: white,
+  A100: white,
+  A200: white,
+  A400: white,
+  A700: white,
+  contrast: (
+    400: #696969,
+  ),
+);
+
+/* Define a theme for your theme using the Material Design palettes available in palette.scss
+* (imported above). For each palette, you can optionally specify a default, lighter, and darker
+* hue. Available color palettes: https://material.io/design/color/ */
+$primary: mat-palette($mat-custom-primary);
+$accent: mat-palette($mat-grey, 300, 400, 600);
+
+/* The warn palette is optional (defaults to red).*/
+$warn: mat-palette($mat-red);
+
+/* Create the theme object (a Sass map containing all of the palettes). */
+/* Light theme */
+$theme: mat-light-theme($primary, $accent, $warn);
+
+$underline-color: mat-palette($mat-grey, 300, 400, 600);
+
+/* Dark theme */
+/*$theme: mat-dark-theme($primary, $accent, $warn);*/
+
+@include angular-material-theme($theme);
