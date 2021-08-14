@@ -4,7 +4,6 @@ from name_string_api.database_utility import db
 class HostName(db.Model):
     __tablename__ = 'host_name'
     id = db.Column(db.Integer, primary_key=True)
-    # service_owner = db.Column('SERVICE_OWNER', db.String(50), nullable=False)
     description = db.Column('DESCRIPTION', db.String(50), nullable=False)
     app_id = db.Column('APP_ID', db.String(50), nullable=False)
     region = db.Column('REGION', db.String(5), nullable=False)
@@ -17,8 +16,6 @@ class HostName(db.Model):
 
     def __init__(self, id, description, app_id, region, location, os_name, zone,
                  lifecycle, role, counter):
-        #self.id = id
-        # self.service_owner = service_owner
         self.description = description
         self.app_id = app_id
         self.region = region
@@ -32,7 +29,6 @@ class HostName(db.Model):
     def as_dict(self):
         return {
             "id": self.id,
-            # "service_owner": self.service_owner,
             "description": self.description,
             "app_id": self.app_id,
             "region": self.region,
@@ -43,5 +39,3 @@ class HostName(db.Model):
             "role": self.role,
             "counter": self.counter
         }
-
-# db.create_all()
