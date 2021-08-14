@@ -3,36 +3,6 @@ from name_string_api.models.users import ApiUser
 import name_string_api.database_utility as db_util
 
 
-# def get_users():
-#     user_list = []
-#     try:
-#         users = Users.query.with_entities(Users).all()
-#     except Exception as e:
-#         raise Exception("Error occurred while fetching users ", e)
-
-#     for user in users:
-#         user_list.append(user.as_dict())
-
-#     return user_list
-
-
-# def get_user_by_user_id(user_id):
-#     """
-#     Get user with primary key
-#     """
-#     try:
-#         user = Users.query.with_entities(Users)\
-#             .filter_by(id=user_id)\
-#             .one_or_none()
-#     except Exception as e:
-#         raise Exception("Failed to get a user with error", e)
-
-#     if not user:
-#         return "Please enter correct user_id"
-
-#     return user.as_dict()
-
-
 def add_api_user(user_data):
     try:
         user = ApiUser(None, user_data['username'], user_data['password'])
@@ -43,6 +13,7 @@ def add_api_user(user_data):
         raise Exception("Failed to add user with error", e)
 
     return "API user added successfully"
+
 
 def add_user(user_data):
     user = User(None, user_data('username'))
@@ -65,7 +36,6 @@ def delete_user(user_id):
         raise Exception("Failed to delete user with error", e)
 
     return user
-
 
 
 def validate_user(username):
