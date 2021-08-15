@@ -150,8 +150,11 @@ def login():
 #    return make_response('Could not verify',  401, {'WWW.Authentication': 'Basic realm: "Login required"'})
 
 
-@app.route('/api/api_auth', methods=['GET', 'POST'])
+@app.route('/auth', methods=['GET', 'POST'])
 def login_api_user():
+
+   username = request.json.get("username", None)
+   password = request.json.get("password", None)
 
    auth = request.authorization 
 
@@ -161,8 +164,10 @@ def login_api_user():
    user = ApiUser.query.filter_by(username=auth.username).first()  
      
    if check_password_hash(user.password, auth.password):  
-      token = jwt.encode({'public_id': user.public_id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])  
-      return jsonify({'token' : token.decode('UTF-8')}) 
+    #   token = jwt.encode({'public_id': user.public_id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+      access_token = create_access_token(identity=username, expires_delta=False, )
+      return jsonify({ "token": access_token })
+    #   return jsonify({'token' : token.decode('UTF-8')}) 
 
    return make_response('Could not verify',  401, {'WWW.Authentication': 'Basic realm: "Login required"'})
 
