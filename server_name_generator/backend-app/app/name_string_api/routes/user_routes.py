@@ -8,25 +8,25 @@ import name_string_api.database_utility as db_util
 import uuid 
 
 
-# @app.route('/create_api_user', methods=['POST'])
-# def add_api_user():
-#     data = request.get_json(force=True)
-#     user_svc.add_api_user(data)
-#     return "API user added successfully"
-
-
-@app.route('/create_api_user', methods=['GET', 'POST'])
+@app.route('/create_api_user', methods=['POST'])
 def add_api_user():
     data = request.get_json(force=True)
-    hashed_password = generate_password_hash(data['password'], method='sha256')
- 
-    user = ApiUser(public_id=str(uuid.uuid4()), username=data['username'], password=hashed_password)
-    db_util.db.session.add(user)
-    db_util.db.session.commit()
-    db_util.db.session.close()
-
-    # user_svc.add_api_user(data)
+    user_svc.add_api_user(data)
     return "API user added successfully"
+
+
+# @app.route('/create_api_user', methods=['GET', 'POST'])
+# def add_api_user():
+#     data = request.get_json(force=True)
+#     hashed_password = generate_password_hash(data['password'], method='sha256')
+ 
+#     user = ApiUser(public_id=str(uuid.uuid4()), username=data['username'], password=hashed_password)
+#     db_util.db.session.add(user)
+#     db_util.db.session.commit()
+#     db_util.db.session.close()
+
+#     # user_svc.add_api_user(data)
+#     return "API user added successfully"
 
 
 @app.route('/users', methods=['GET'])

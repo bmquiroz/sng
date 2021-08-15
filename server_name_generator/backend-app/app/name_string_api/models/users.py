@@ -23,18 +23,35 @@ class User(UserMixin, db.Model):
 class ApiUser(UserMixin, db.Model):
     __tablename__ = 'api_users'
     id = db.Column(db.Integer, primary_key=True)
-    public_id = db.Column(db.Integer)
     username = db.Column('USERNAME', db.String(50), nullable=False)
     password = db.Column('PASSWORD', db.String(5), nullable=False)
 
-    def __init__(self, id, public_id=None, username=None, password=None):
-        self.public_id = public_id
+    def __init__(self, id, username=None, password=None):
         self.username = username
         self.password = password
 
     def as_dict(self):
         return {
             "id": self.id,
-            "public_id": self.public_id,
             "username": self.username,
         }
+
+
+# class ApiUser(UserMixin, db.Model):
+#     __tablename__ = 'api_users'
+#     id = db.Column(db.Integer, primary_key=True)
+#     public_id = db.Column(db.Integer)
+#     username = db.Column('USERNAME', db.String(50), nullable=False)
+#     password = db.Column('PASSWORD', db.String(5), nullable=False)
+
+#     def __init__(self, id, public_id=None, username=None, password=None):
+#         self.public_id = public_id
+#         self.username = username
+#         self.password = password
+
+#     def as_dict(self):
+#         return {
+#             "id": self.id,
+#             "public_id": self.public_id,
+#             "username": self.username,
+#         }
