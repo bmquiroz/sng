@@ -220,7 +220,7 @@ def query_hostname_ad(data):
             l.protocol_version = ldap.VERSION3
             l.set_option(ldap.OPT_REFERRALS, 0)
 
-            bind = l.simple_bind_s("administrator@home.redchip.net", "Blowthis1")
+            bind = l.simple_bind_s("administrator@home.redchip.net", "")
 
             base = "dc=home,dc=redchip,dc=net"
             criteria = f"(&(objectClass=computer)(sAMAccountName={data}))"
