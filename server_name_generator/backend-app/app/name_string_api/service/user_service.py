@@ -4,16 +4,16 @@ import name_string_api.database_utility as db_util
 import uuid 
 
 
-def add_api_user(user_data):
-    try:
-        user = ApiUser(None, user_data['username'], user_data['password'])
-        db_util.db.session.add(user)
-        db_util.db.session.commit()
-        db_util.db.session.close()
-    except Exception as e:
-        raise Exception("Failed to add user with error", e)
+# def add_api_user(user_data):
+#     try:
+#         user = ApiUser(None, user_data['username'], user_data['password'])
+#         db_util.db.session.add(user)
+#         db_util.db.session.commit()
+#         db_util.db.session.close()
+#     except Exception as e:
+#         raise Exception("Failed to add user with error", e)
 
-    return "API user added successfully"
+#     return "API user added successfully"
 
 
 # def add_api_user(user_data):
