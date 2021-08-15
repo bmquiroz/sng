@@ -17,3 +17,4 @@ Flask-Cors==3.0.9
 PyJWT==1.7.1
 Flask-JWT-Extended==3.25.0
 Werkzeug==2.0.1
+python-ldap==3.3.1
