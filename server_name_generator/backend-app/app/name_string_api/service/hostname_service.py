@@ -224,8 +224,8 @@ def query_hostname_ad(data):
             bind = l.simple_bind_s("administrator@home.redchip.net", "")
 
             base = "dc=home,dc=redchip,dc=net"
-            # criteria = f"(&(objectClass=computer)(sAMAccountName={hostname}))"
-            criteria = "(&(objectClass=computer)(sAMAccountName=NJ-TORRENT1$))"
+            criteria = f"(&(objectClass=computer)(sAMAccountName={data}))"
+            # criteria = "(&(objectClass=computer)(sAMAccountName=NJ-TORRENT1$))"
             attributes = ['distinguishedName']
             result = l.search_s(base, ldap.SCOPE_SUBTREE, criteria, attributes)
 
