@@ -40,7 +40,8 @@ class User(UserMixin, db.Model):
 class ApiUser(UserMixin, db.Model):
     __tablename__ = 'api_users'
     id = db.Column(db.Integer, primary_key=True)
-    public_id = db.Column(db.Integer)
+    # public_id = db.Column(db.Integer)
+    public_id = db.Column(db.String(50), unique=True)
     username = db.Column('USERNAME', db.String(50), nullable=False)
     password = db.Column('PASSWORD', db.String(5), nullable=False)
 
