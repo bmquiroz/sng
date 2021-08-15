@@ -1,5 +1,6 @@
 from name_string_api.models.hostnames import HostName
 import name_string_api.database_utility as db_util
+import ldap
 
 
 def get_values_for_hostname(data):
@@ -207,6 +208,31 @@ def delete_hostname(host_id):
             return "Deleted successfully"
         else:
             return 'Invalid host ID'
+
+    except Exception as e:
+        raise Exception("Error occurred while deleting hostname with error: ", e)
+
+
+def query_hostname_ad(data):
+    try:
+        l = ldap.initialize("ldap://10.0.0.41")
+        if l:
+            l.protocol_version = ldap.VERSION3
+            l.set_option(ldap.OPT_REFERRALS, 0)
+
+            bind = l.simple_bind_s("administrator@home.redchip.net", "Blowthis1")
+
+            base = "dc=home,dc=redchip,dc=net"
+            criteria = f"(&(objectClass=computer)(sAMAccountName={data}))"
+            attributes = ['distinguishedName']
+            result = l.search_s(base, ldap.SCOPE_SUBTREE, criteria, attributes)
+
+            results = [entry for dn, entry in result if isinstance(entry, dict)]
+            # print (results)
+            return results
+            l.unbind()
+        else:
+            return 'Could not find computer object in AD'
 
     except Exception as e:
         raise Exception("Error occurred while deleting hostname with error: ", e)

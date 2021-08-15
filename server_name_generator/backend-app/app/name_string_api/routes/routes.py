@@ -14,7 +14,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import name_string_api.database_utility as db_util
 from flask_cors import CORS, cross_origin
 import uuid 
-import jwt
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity

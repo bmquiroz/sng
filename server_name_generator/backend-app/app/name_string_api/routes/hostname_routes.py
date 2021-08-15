@@ -89,3 +89,13 @@ def create_hostname():
         hostname_string = hostname_svc.insert_hostname(data)
 
         return {"hostname": hostname_string}
+
+
+@app.route('/query_ad', methods=['POST', 'GET'])
+@jwt_required
+def query_ad():
+    if request.method == 'POST':
+        data = request.get_json(force=True)
+        ldap_object = hostname_svc.query_hostname_ad(data)
+
+        return {"ldap_object": ldap_object}
