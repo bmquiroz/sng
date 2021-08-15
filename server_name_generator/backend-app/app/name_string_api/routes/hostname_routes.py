@@ -12,6 +12,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 CORS(app)
+app.config['JWT_TOKEN_LOCATION'] = ['headers', 'query_string']
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
