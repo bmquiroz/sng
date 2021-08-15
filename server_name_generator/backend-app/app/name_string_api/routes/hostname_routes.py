@@ -8,6 +8,7 @@ import json
 import logging
 logging.getLogger('flask_cors').setLevel(logging.DEBUG)
 logging.basicConfig()
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 CORS(app)
@@ -68,12 +69,22 @@ def create_sting():
         return response
 
 
-class CreateHostname(Resource):
-    def put(self):
+# class CreateHostname(Resource):
+#     def put(self):
+#         data = request.get_json(force=True)
+#         hostname_string = hostname_svc.insert_hostname(data)
+
+#         return {"hostname": hostname_string}
+
+
+# api.add_resource(CreateHostname, '/create_hostname')
+
+
+@app.route('/create_hostname', methods=['POST', 'GET'])
+@jwt_required()
+def create_hostname():
+    if request.method == 'POST':
         data = request.get_json(force=True)
         hostname_string = hostname_svc.insert_hostname(data)
 
         return {"hostname": hostname_string}
-
-
-api.add_resource(CreateHostname, '/create_hostname')
