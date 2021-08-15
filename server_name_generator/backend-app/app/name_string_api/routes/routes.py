@@ -153,8 +153,9 @@ def login():
 @app.route('/auth', methods=['GET', 'POST'])
 def login_api_user():
 
-   username = request.json.get("username", None)
-   password = request.json.get("password", None)
+   data = request.get_json(force=True)
+   username = data.get("username")
+   password = data.get("password")
 
    auth = request.authorization 
 
