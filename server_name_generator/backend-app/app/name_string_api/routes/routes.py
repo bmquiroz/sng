@@ -3,12 +3,14 @@ import json
 import os
 from name_string_api import app
 from name_string_api.models.users import User
+from name_string_api.models.users import ApiUser
 from name_string_api.service import user_service as user_svc
 from flask import render_template, request, redirect, url_for, abort, jsonify, Response, make_response, send_from_directory
 from flask_login import LoginManager, UserMixin, login_required, login_user,\
     logout_user, current_user
 from flask_ldap3_login.forms import LDAPLoginForm
 from flask_ldap3_login import LDAP3LoginManager, AuthenticationResponseStatus
+from werkzeug.security import generate_password_hash, check_password_hash
 import name_string_api.database_utility as db_util
 from flask_cors import CORS, cross_origin
 import uuid 
@@ -127,6 +129,42 @@ def login():
         else:
             return jsonify({"response":'Login not successful'})
     return render_template('login.html')
+    
+
+# @app.route('/api/api_auth', methods=['GET', 'POST'])
+# def login_api_user():
+
+#    auth = request.authorization 
+
+#    if not auth or not auth.username or not auth.password:  
+#       return make_response('Could not verify', 401, {'WWW.Authentication': 'Basic realm: "Login required"'})
+#    else:
+#        username = request.form['username']
+#        password = request.form['password']
+#        user_id = user_svc.validate_api_user(username, password)
+     
+#    if check_password_hash(user_id.password, auth.password):  
+#       token = jwt.encode({'public_id': user_id.public_id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])  
+#       return jsonify({'token' : token.decode('UTF-8')}) 
+
+#    return make_response('Could not verify',  401, {'WWW.Authentication': 'Basic realm: "Login required"'})
+
+
+@app.route('/api/api_auth', methods=['GET', 'POST'])
+def login_api_user():
+
+   auth = request.authorization 
+
+   if not auth or not auth.username or not auth.password:  
+      return make_response('Could not verify', 401, {'WWW.Authentication': 'Basic realm: "Login required"'})
+
+   user = ApiUser.query.filter_by(username=auth.username).first()  
+     
+   if check_password_hash(user.password, auth.password):  
+      token = jwt.encode({'public_id': user.public_id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])  
+      return jsonify({'token' : token.decode('UTF-8')}) 
+
+   return make_response('Could not verify',  401, {'WWW.Authentication': 'Basic realm: "Login required"'})
 
 
 @app.route('/init_db')

@@ -2,12 +2,30 @@ import json
 from flask import request
 from name_string_api import app
 from name_string_api.service import user_service as user_svc
+from werkzeug.security import generate_password_hash, check_password_hash
+from name_string_api.models.users import ApiUser
+import name_string_api.database_utility as db_util
+import uuid 
 
 
-@app.route('/create_api_user', methods=['POST'])
+# @app.route('/create_api_user', methods=['POST'])
+# def add_api_user():
+#     data = request.get_json(force=True)
+#     user_svc.add_api_user(data)
+#     return "API user added successfully"
+
+
+@app.route('/create_api_user', methods=['GET', 'POST'])
 def add_api_user():
     data = request.get_json(force=True)
-    user_svc.add_api_user(data)
+    hashed_password = generate_password_hash(data['password'], method='sha256')
+ 
+    user = ApiUser(public_id=str(uuid.uuid4()), username=data['username'], password=hashed_password)
+    db_util.db.session.add(user)
+    db_util.db.session.commit()
+    db_util.db.session.close()
+
+    # user_svc.add_api_user(data)
     return "API user added successfully"
 
 

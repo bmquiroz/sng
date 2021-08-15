@@ -1,18 +1,42 @@
 from name_string_api.models.users import User
 from name_string_api.models.users import ApiUser
 import name_string_api.database_utility as db_util
+import uuid 
 
 
-def add_api_user(user_data):
-    try:
-        user = ApiUser(None, user_data['username'], user_data['password'])
-        db_util.db.session.add(user)
-        db_util.db.session.commit()
-        db_util.db.session.close()
-    except Exception as e:
-        raise Exception("Failed to add user with error", e)
+# def add_api_user(user_data):
+#     try:
+#         user = ApiUser(None, user_data['username'], user_data['password'])
+#         db_util.db.session.add(user)
+#         db_util.db.session.commit()
+#         db_util.db.session.close()
+#     except Exception as e:
+#         raise Exception("Failed to add user with error", e)
 
-    return "API user added successfully"
+#     return "API user added successfully"
+
+
+# def add_api_user(user_data):
+#     try:
+#         user = ApiUser(None, public_id=str(uuid.uuid4()), user_data['username'], user_data['password'])
+#         db_util.db.session.add(user)
+#         db_util.db.session.commit()
+#         db_util.db.session.close()
+#     except Exception as e:
+#         raise Exception("Failed to add user with error", e)
+
+#     return "API user added successfully"
+
+
+def validate_api_user(username, password):
+    user = ApiUser.query.with_entities(ApiUser)\
+        .filter_by(username=username)\
+        .filter_by(password=password)\
+        .one_or_none()
+    if user:
+        return user.id
+
+    return None
 
 
 def add_user(user_data):
@@ -21,21 +45,6 @@ def add_user(user_data):
     db_util.db.session.commit()
     db_util.db.session.close()
     return user_data
-    
-
-def delete_user(user_id):
-    """
-    Delete user by its primary key id
-    """
-    try:
-        user = Users.query.filter_by(id=user_id).one()
-        db_util.db.session.delete(user)
-        db_util.db.session.commit()
-        db_util.db.session.close()
-    except Exception as e:
-        raise Exception("Failed to delete user with error", e)
-
-    return user
 
 
 def validate_user(username):
@@ -46,19 +55,3 @@ def validate_user(username):
         return user.id
 
     return None
-
-
-def get_role(user_id):
-    try:
-        role = Users.query.with_entities(Users.role)\
-            .filter_by(id=user_id)\
-            .one_or_none()
-        print(str(role[0].value))
-
-        if not role:
-            return "Failed to get role for user {}".format(user_id)
-
-    except Exception as e:
-        raise Exception("Failed to get role for user with user_id {} with error ()".format(user_id, str(e)))
-
-    return str(role[0].value)
