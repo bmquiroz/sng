@@ -96,6 +96,7 @@ def create_hostname():
 def query_ad():
     if request.method == 'POST':
         data = request.get_json(force=True)
-        ldap_object = hostname_svc.query_hostname_ad(data)
+        computer_object = data['computer_object']
+        ldap_object = hostname_svc.query_hostname_ad(computer_object)
 
         return {"ldap_object": ldap_object}

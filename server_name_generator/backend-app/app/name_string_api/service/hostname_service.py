@@ -213,7 +213,7 @@ def delete_hostname(host_id):
         raise Exception("Error occurred while deleting hostname with error: ", e)
 
 
-def query_hostname_ad(data):
+def query_hostname_ad(computer_object):
     try:
         l = ldap.initialize("ldap://10.0.0.41")
         if l:
@@ -223,7 +223,7 @@ def query_hostname_ad(data):
             bind = l.simple_bind_s("administrator@home.redchip.net", "")
 
             base = "dc=home,dc=redchip,dc=net"
-            criteria = f"(&(objectClass=computer)(sAMAccountName={data}))"
+            criteria = f"(&(objectClass=computer)(sAMAccountName={computer_object}))"
             attributes = ['distinguishedName']
             result = l.search_s(base, ldap.SCOPE_SUBTREE, criteria, attributes)
 
