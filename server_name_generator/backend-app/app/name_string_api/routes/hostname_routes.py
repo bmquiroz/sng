@@ -81,7 +81,7 @@ def create_sting():
 
 
 @app.route('/create_hostname', methods=['POST', 'GET'])
-@jwt_required()
+@jwt_required
 def create_hostname():
     if request.method == 'POST':
         data = request.get_json(force=True)
