@@ -217,7 +217,7 @@ def delete_hostname(host_id):
 def query_hostname_ad(hostname):
     try:
         l = ldap.initialize("ldap://10.0.0.41")
-        # hostname = str(data)
+        hostname = str(hostname)
         if l:
             l.protocol_version = ldap.VERSION3
             l.set_option(ldap.OPT_REFERRALS, 0)
@@ -232,9 +232,9 @@ def query_hostname_ad(hostname):
 
             results = [entry for dn, entry in result if isinstance(entry, dict)]
             # print (results)
-            # return results
+            return results
             # return (json.dumps(results))
-            return json.dumps(results).encode("utf-8")
+            # return json.dumps(results).encode("utf-8")
             l.unbind()
         else:
             return 'Could not find computer object in AD'
