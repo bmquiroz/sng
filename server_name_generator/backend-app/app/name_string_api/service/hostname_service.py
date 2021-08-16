@@ -2,6 +2,7 @@ from name_string_api.models.hostnames import HostName
 import name_string_api.database_utility as db_util
 import ldap
 import json
+from flask import jsonify
 
 
 def get_values_for_hostname(data):
@@ -294,6 +295,6 @@ def query_hostname_ad(hostname):
 
     results = [entry for dn, entry in result if isinstance(entry, dict)]
 
-    return json.dumps(results)
+    return jsonify({ "ldap_path": results })
 
     l.unbind()
