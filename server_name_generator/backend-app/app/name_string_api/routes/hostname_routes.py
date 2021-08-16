@@ -103,10 +103,19 @@ def create_hostname():
 #         return {"ldap_object": ldap_object}
 
 
-@app.route('/query_ad/<something>', methods=['POST', 'GET'])
+# @app.route('/query_ad/<something>', methods=['POST', 'GET'])
+# # @jwt_required
+# def query_ad(something):
+#     if request.method == 'POST':
+#         data = request.get_json(force=True)
+
+#         return something
+
+
+@app.route('/query_ad', methods=['POST', 'GET'])
 # @jwt_required
-def query_ad(something):
+def query_ad():
     if request.method == 'POST':
         data = request.get_json(force=True)
 
-        return something
+        return data
