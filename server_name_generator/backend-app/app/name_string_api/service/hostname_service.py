@@ -245,4 +245,4 @@ def delete_hostname(host_id):
 
 def query_hostname_ad(hostname):
 
-    return hostname
+    return 'Found host'
