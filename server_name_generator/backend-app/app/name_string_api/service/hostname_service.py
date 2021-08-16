@@ -233,10 +233,11 @@ def query_hostname_ad(hostname):
             results = [entry for dn, entry in result if isinstance(entry, dict)]
             # print (results)
             # return results
-            return (json.dumps(results))
+            # return (json.dumps(results))
+            return json.dumps(results).encode("utf-8")
             l.unbind()
         else:
             return 'Could not find computer object in AD'
 
     except Exception as e:
-        raise Exception("Error occurred while deleting hostname with error: ", e)
+        raise Exception("Error occurred while searching for hostname with error: ", e)
