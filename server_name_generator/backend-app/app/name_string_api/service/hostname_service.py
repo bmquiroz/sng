@@ -251,7 +251,7 @@ def delete_hostname(host_id):
 def query_hostname_ad(hostname):
     try:
         l = ldap.initialize("ldap://10.0.0.41")
-        hostname = json.dumps(hostname)
+        computer_object = json.dumps(hostname)
         if l:
             l.protocol_version = ldap.VERSION3
             l.set_option(ldap.OPT_REFERRALS, 0)
@@ -259,7 +259,7 @@ def query_hostname_ad(hostname):
             bind = l.simple_bind_s("administrator@home.redchip.net", "")
 
             base = "dc=home,dc=redchip,dc=net"
-            criteria = f"(&(objectClass=computer)(sAMAccountName={hostname}))"
+            criteria = f"(&(objectClass=computer)(sAMAccountName={computer_object}))"
             # criteria = "(&(objectClass=computer)(sAMAccountName=NJ-TORRENT1$))"
             attributes = ['distinguishedName']
             result = l.search_s(base, ldap.SCOPE_SUBTREE, criteria, attributes)
