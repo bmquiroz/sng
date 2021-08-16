@@ -91,13 +91,22 @@ def create_hostname():
         return {"hostname": hostname_string}
 
 
-@app.route('/query_ad', methods=['POST', 'GET'])
-@jwt_required
-def query_ad():
+# @app.route('/query_ad', methods=['POST', 'GET'])
+# @jwt_required
+# def query_ad():
+#     if request.method == 'POST':
+#         data = request.get_json(force=True)
+#         # computer_object = data['computer_object']
+#         # computer_object = data.get('computer_object')
+#         ldap_object = hostname_svc.query_hostname_ad(data)
+
+#         return {"ldap_object": ldap_object}
+
+
+@app.route('/query_ad/<something>', methods=['POST', 'GET'])
+# @jwt_required
+def query_ad(something):
     if request.method == 'POST':
         data = request.get_json(force=True)
-        # computer_object = data['computer_object']
-        # computer_object = data.get('computer_object')
-        ldap_object = hostname_svc.query_hostname_ad(data)
 
-        return {"ldap_object": ldap_object}
+        return something
