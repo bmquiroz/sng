@@ -294,6 +294,6 @@ def query_hostname_ad(hostname):
 
     results = [entry for dn, entry in result if isinstance(entry, dict)]
 
-    return results
+    return json.dumps(results)
 
     l.unbind()
