@@ -225,13 +225,13 @@ def query_hostname_ad(hostname):
     l.set_option(ldap.OPT_REFERRALS, 0)
     bind = l.simple_bind_s("administrator@home.redchip.net", "")
     base = "dc=home,dc=redchip,dc=net"
-    # criteria = "(&(objectClass=computer)(sAMAccountName=nj-nas1$))"
-    criteria = f"(&(objectClass=computer)(cn={computer_object}))"
+    # criteria = f"(&(objectClass=computer)(cn={computer_object}))"
+    criteria = "(&(objectClass=computer)(cn=%s))" % computer_object
     attributes = ['dNSHostName']
     result = l.search_s(base, ldap.SCOPE_SUBTREE, criteria, attributes)
     results = [entry for dn, entry in result if isinstance(entry, dict)]
 
     if results == []:
-       return "Computer object not found"
+       return "Computer object %s not found" % computer_object
     else:
-       return "Computer object found"
+       return "Computer object %s found" % computer_object
