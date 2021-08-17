@@ -218,6 +218,7 @@ def delete_hostname(host_id):
 def query_hostname_ad(hostname):
 
     computer_object = json.dumps(hostname)
+    computer_object = (computer_object.strip('"'))
     LDAP_SERVER = "ldap://10.0.0.41"
 
     l = ldap.initialize(LDAP_SERVER)
