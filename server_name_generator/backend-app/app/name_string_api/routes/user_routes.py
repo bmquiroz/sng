@@ -8,13 +8,6 @@ import name_string_api.database_utility as db_util
 import uuid 
 
 
-# @app.route('/create_api_user', methods=['POST'])
-# def add_api_user():
-#     data = request.get_json(force=True)
-#     user_svc.add_api_user(data)
-#     return "API user added successfully"
-
-
 @app.route('/create_api_user', methods=['GET', 'POST'])
 def add_api_user():
     data = request.get_json(force=True)

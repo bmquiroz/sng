@@ -215,86 +215,23 @@ def delete_hostname(host_id):
         raise Exception("Error occurred while deleting hostname with error: ", e)
 
 
-# def query_hostname_ad(hostname):
-#     try:
-#         l = ldap.initialize("ldap://10.0.0.41")
-#         hostname = str(hostname)
-#         if l:
-#             l.protocol_version = ldap.VERSION3
-#             l.set_option(ldap.OPT_REFERRALS, 0)
-
-#             bind = l.simple_bind_s("administrator@home.redchip.net", "")
-
-#             base = "dc=home,dc=redchip,dc=net"
-#             criteria = f"(&(objectClass=computer)(sAMAccountName={hostname}))"
-#             # criteria = "(&(objectClass=computer)(sAMAccountName=NJ-TORRENT1$))"
-#             attributes = ['distinguishedName']
-#             result = l.search_s(base, ldap.SCOPE_SUBTREE, criteria, attributes)
-
-#             results = [entry for dn, entry in result if isinstance(entry, dict)]
-#             # print (results)
-#             return results
-#             # return (json.dumps(results))
-#             # return json.dumps(results).encode("utf-8")
-#             l.unbind()
-#         else:
-#             return 'Could not find computer object in AD'
-
-#     except Exception as e:
-#         raise Exception("Error occurred while searching for hostname with error: ", e)
-
-
-# def query_hostname_ad(hostname):
-
-#     return 'Found host'
-
-
-# def query_hostname_ad(hostname):
-#     try:
-#         l = ldap.initialize("ldap://10.0.0.41")
-#         computer_object = json.dumps(hostname)
-#         if l:
-#             l.protocol_version = ldap.VERSION3
-#             l.set_option(ldap.OPT_REFERRALS, 0)
-
-#             bind = l.simple_bind_s("administrator@home.redchip.net", "")
-
-#             base = "dc=home,dc=redchip,dc=net"
-#             criteria = f"(&(objectClass=computer)(sAMAccountName={computer_object}))"
-#             # criteria = "(&(objectClass=computer)(sAMAccountName=NJ-TORRENT1$))"
-#             attributes = ['distinguishedName']
-#             result = l.search_s(base, ldap.SCOPE_SUBTREE, criteria, attributes)
-
-#             results = [entry for dn, entry in result if isinstance(entry, dict)]
-#             # print (results)
-#             return results
-#             # return (json.dumps(results))
-#             # return json.dumps(results).encode("utf-8")
-#             l.unbind()
-#         else:
-#             return 'Could not find computer object in AD'
-
-#     except Exception as e:
-#         raise Exception("Error occurred while searching for hostname with error: ", e)
-
-
 def query_hostname_ad(hostname):
 
-    l = ldap.initialize("ldap://10.0.0.41")
     computer_object = json.dumps(hostname)
+    LDAP_SERVER = "ldap://10.0.0.41"
 
+    l = ldap.initialize(LDAP_SERVER)
     l.protocol_version = ldap.VERSION3
     l.set_option(ldap.OPT_REFERRALS, 0)
-
     bind = l.simple_bind_s("administrator@home.redchip.net", "")
-
     base = "dc=home,dc=redchip,dc=net"
-    criteria = "(&(objectClass=computer)(sAMAccountName=NJ-TORRENT1$))"
-    attributes = ['distinguishedName']
+    # criteria = "(&(objectClass=computer)(sAMAccountName=nj-nas1$))"
+    criteria = f"(&(objectClass=computer)(cn={computer_object}))"
+    attributes = ['dNSHostName']
     result = l.search_s(base, ldap.SCOPE_SUBTREE, criteria, attributes)
-
     results = [entry for dn, entry in result if isinstance(entry, dict)]
 
-    return jsonify({ "ldap_path": results })
-
-    l.unbind()
+    if results == []:
+       return "Computer object not found"
+    else:
+       return "Computer object found"

@@ -128,25 +128,6 @@ def login():
         else:
             return jsonify({"response":'Login not successful'})
     return render_template('login.html')
-    
-
-# @app.route('/api/api_auth', methods=['GET', 'POST'])
-# def login_api_user():
-
-#    auth = request.authorization 
-
-#    if not auth or not auth.username or not auth.password:  
-#       return make_response('Could not verify', 401, {'WWW.Authentication': 'Basic realm: "Login required"'})
-#    else:
-#        username = request.form['username']
-#        password = request.form['password']
-#        user_id = user_svc.validate_api_user(username, password)
-     
-#    if check_password_hash(user_id.password, auth.password):  
-#       token = jwt.encode({'public_id': user_id.public_id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])  
-#       return jsonify({'token' : token.decode('UTF-8')}) 
-
-#    return make_response('Could not verify',  401, {'WWW.Authentication': 'Basic realm: "Login required"'})
 
 
 @app.route('/auth', methods=['GET', 'POST'])

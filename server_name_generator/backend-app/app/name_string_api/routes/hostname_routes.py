@@ -70,17 +70,6 @@ def create_sting():
         return response
 
 
-# class CreateHostname(Resource):
-#     def put(self):
-#         data = request.get_json(force=True)
-#         hostname_string = hostname_svc.insert_hostname(data)
-
-#         return {"hostname": hostname_string}
-
-
-# api.add_resource(CreateHostname, '/create_hostname')
-
-
 @app.route('/create_hostname', methods=['POST', 'GET'])
 @jwt_required
 def create_hostname():
@@ -91,42 +80,11 @@ def create_hostname():
         return {"hostname": hostname_string}
 
 
-# @app.route('/query_ad', methods=['POST', 'GET'])
-# @jwt_required
-# def query_ad():
-#     if request.method == 'POST':
-#         data = request.get_json(force=True)
-#         # computer_object = data['computer_object']
-#         # computer_object = data.get('computer_object')
-#         ldap_object = hostname_svc.query_hostname_ad(data)
-
-#         return {"ldap_object": ldap_object}
-
-
-# @app.route('/query_ad/<something>', methods=['POST', 'GET'])
-# # @jwt_required
-# def query_ad(something):
-#     if request.method == 'POST':
-#         data = request.get_json(force=True)
-
-#         return something
-
-
-# @app.route('/query_ad', methods=['POST', 'GET'])
-# # @jwt_required
-# def query_ad():
-#     if request.method == 'POST':
-#         data = request.get_json(force=True)
-
-#         return data
-
-
 @app.route('/query_ad/<hostname>', methods=['POST', 'GET'])
 @jwt_required
 def query_ad(hostname):
     if request.method == 'POST':
         data = request.get_json(force=True)
-        ldap_object = hostname_svc.query_hostname_ad(hostname)
+        ldap_object_query = hostname_svc.query_hostname_ad(hostname)
 
-        return {"ldap_object": ldap_object}
-        # return hostname
+        return ldap_object_query
