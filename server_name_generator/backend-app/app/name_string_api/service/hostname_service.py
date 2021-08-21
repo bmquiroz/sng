@@ -5,7 +5,7 @@ import json
 from flask import jsonify
 
 
-def get_values_for_hostname(data):
+def get_values_for_hostname(data_list):
     """
     :param data: description, app_id, region, location, os, lifecycle, role
     :return: abbreviated value of description, app_id, region, location, os,
@@ -29,15 +29,14 @@ def get_values_for_hostname(data):
     if counter:
         counter = '%05d' % (int(counter))
 
-    # service_owner = data['service_owner']
-    description = data['description']
-    app_id = data['app_id']
-    region = data['region']
-    location = data['location']
-    os_name = data['os']
-    zone = data['zone']
-    lifecycle = data['lifecycle']
-    role = data['role']
+    description = data_list['description']
+    app_id = data_list['app_id']
+    region = data_list['region']
+    location = data_list['location']
+    os_name = data_list['os']
+    zone = data_list['zone']
+    lifecycle = data_list['lifecycle']
+    role = data_list['role']
     region = get_region_abbreviations(region)
     location = get_location_abbreviations(location)
     os_name = get_os_name_abbreviations(os_name)
@@ -195,7 +194,7 @@ def insert_hostname(data_list):
     for obj in range(len(data_list)):
 
         description, app_id, region, location, os_name, zone, lifecycle, role, \
-          counter = get_values_for_hostname(data_list[obj])
+          counter = get_values_for_hostname(data_list)
         hostname_string = region + location + os_name + zone + lifecycle + \
                       role + str(counter)
         hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
