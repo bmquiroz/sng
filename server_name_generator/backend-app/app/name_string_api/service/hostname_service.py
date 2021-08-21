@@ -207,7 +207,7 @@ def insert_hostname(data_list):
 
         hostname_d.append(data_list[obj])
 
-    return hostname_d
+    return hostname_d[0]
 
 
 # def insert_hostname(data):
