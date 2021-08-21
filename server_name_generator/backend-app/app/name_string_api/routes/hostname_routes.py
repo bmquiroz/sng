@@ -78,9 +78,9 @@ def create_hostname():
 
         data_list = [data]
 
-        # hostname_string = hostname_svc.insert_hostname(data_list)
+        hostname_string = hostname_svc.insert_hostname(data_list)
 
-        return {"hostname": data_list}
+        return {"hostname": hostname_string}
         
 
 # @app.route('/create_hostname', methods=['POST', 'GET'])
