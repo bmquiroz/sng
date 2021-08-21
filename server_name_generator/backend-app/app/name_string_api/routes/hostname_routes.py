@@ -75,9 +75,22 @@ def create_sting():
 def create_hostname():
     if request.method == 'POST':
         data = request.get_json(force=True)
-        hostname_string = hostname_svc.insert_hostname(data)
 
-        return {"hostname": hostname_string}
+        data_list = [data]
+
+        # hostname_string = hostname_svc.insert_hostname(data_list)
+
+        return {"hostname": data_list}
+        
+
+# @app.route('/create_hostname', methods=['POST', 'GET'])
+# @jwt_required
+# def create_hostname():
+#     if request.method == 'POST':
+#         data = request.get_json(force=True)
+#         hostname_string = hostname_svc.insert_hostname(data)
+
+#         return {"hostname": hostname_string}
 
 
 @app.route('/query_ad/<hostname>', methods=['POST', 'GET'])

@@ -199,6 +199,18 @@ def insert_hostname(data):
     return hostname_string
 
 
+# def insert_hostname(data):
+#     description, app_id, region, location, os_name, zone, lifecycle, role, \
+#         counter = get_values_for_hostname(data)
+#     hostname_string = region + location + os_name + zone + lifecycle + \
+#                       role + str(counter)
+#     hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
+#     db_util.db.session.add(hostname_data)
+#     db_util.db.session.commit()
+#     db_util.db.session.close()
+#     return hostname_string
+
+
 def delete_hostname(host_id):
     try:
         host_name = HostName.query.filter_by(id=host_id).one_or_none()
