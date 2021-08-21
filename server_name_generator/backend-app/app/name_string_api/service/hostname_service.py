@@ -205,7 +205,8 @@ def insert_hostname(data_list):
         # db_util.db.session.commit()
         # db_util.db.session.close()
 
-        hostname_d.append([obj])
+        hostname_d.append(obj[0])
+        hostname_d.append(obj[1])
 
     return hostname_d
 
