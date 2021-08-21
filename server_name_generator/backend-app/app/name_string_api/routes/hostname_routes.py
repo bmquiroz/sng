@@ -74,9 +74,9 @@ def create_sting():
 @jwt_required
 def create_hostname():
     if request.method == 'POST':
-        data = request.get_json(force=True)
+        data_list = request.get_json(force=True)
 
-        data_list = {data}
+        # data_list = {data}
 
         hostname_string = hostname_svc.insert_hostname(data_list)
 
