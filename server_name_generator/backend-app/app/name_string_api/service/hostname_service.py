@@ -191,10 +191,11 @@ def insert_hostname(data_list):
 
     hostname_data =[]
 
-    for obj in data_list:
+    # for obj in data_list:
+    for obj in range(len(data_list)):
 
         description, app_id, region, location, os_name, zone, lifecycle, role, \
-          counter = get_values_for_hostname(data_list)
+          counter = get_values_for_hostname(data_list[obj])
         hostname_string = region + location + os_name + zone + lifecycle + \
                       role + str(counter)
         hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
