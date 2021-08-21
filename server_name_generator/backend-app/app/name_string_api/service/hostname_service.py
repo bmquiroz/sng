@@ -188,7 +188,7 @@ def get_role_abbreviations(role):
 
 def insert_hostname(data_list):
 
-    hostname_d =[]
+    hostname_d ={}
 
     # for obj in data_list:
     for obj in range(len(data_list)):
@@ -205,9 +205,10 @@ def insert_hostname(data_list):
         # db_util.db.session.commit()
         # db_util.db.session.close()
 
-        hostname_d.append(data_list[obj])
+        # hostname_d.append(data_list[obj])
+        hostname_d[data_list]
 
-    return hostname_d[0]
+    return hostname_d
 
 
 # def insert_hostname(data):
