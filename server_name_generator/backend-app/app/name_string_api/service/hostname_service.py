@@ -7,7 +7,7 @@ from flask import jsonify
 
 def get_values_for_hostname(value):
     """
-    :param data: description, app_id, region, location, os, lifecycle, role
+    :param value: description, app_id, region, location, os, lifecycle, role
     :return: abbreviated value of description, app_id, region, location, os,
             lifecycle, role
     """
@@ -30,6 +30,7 @@ def get_values_for_hostname(value):
         counter = '%05d' % (int(counter))
 
     description = value['description']
+    # value['description'] = description
     app_id = value['app_id']
     region = value['region']
     location = value['location']
@@ -46,6 +47,48 @@ def get_values_for_hostname(value):
 
     return description, app_id, region, location, os_name, zone, lifecycle, role,\
         counter
+
+
+# def get_values_for_hostname(data):
+#     """
+#     :param data: service_owner, region, location, os, lifecycle, role
+#     :return: abbreviated value of service_owner, region, location, os,
+#             lifecycle, role
+#     """
+#     try:
+#         hostname = HostName.query\
+#             .with_entities(HostName.counter)\
+#             .order_by(HostName.id.desc())\
+#             .first()
+#     except Exception as e:
+#         raise Exception('Failed to get hostname with error: ', e)
+
+#     if hostname:
+#         counter = hostname.counter
+#         counter = str(int(counter) + 1)
+#     else:
+#         counter = 0
+#         counter += 1
+#         counter = str(counter)
+#     if counter:
+#         counter = '%05d' % (int(counter))
+
+#     service_owner = data['service_owner']
+#     region = data['region']
+#     location = data['location']
+#     os_name = data['os']
+#     zone = data['zone']
+#     lifecycle = data['lifecycle']
+#     role = data['role']
+#     region = get_region_abbreviations(region)
+#     location = get_location_abbreviations(location)
+#     os_name = get_os_name_abbreviations(os_name)
+#     zone = get_zone_abbreviations(zone)
+#     lifecycle = get_lifecycle_abbreviations(lifecycle)
+#     role = get_role_abbreviations(role)
+
+#     return service_owner, region, location, os_name, zone, lifecycle, role,\
+#         counter
 
 
 def get_region_abbreviations(region):
