@@ -5,7 +5,7 @@ import json
 from flask import jsonify
 
 
-def get_values_for_hostname(data_list):
+def get_values_for_hostname(value):
     """
     :param data: description, app_id, region, location, os, lifecycle, role
     :return: abbreviated value of description, app_id, region, location, os,
@@ -29,14 +29,14 @@ def get_values_for_hostname(data_list):
     if counter:
         counter = '%05d' % (int(counter))
 
-    description = data_list['description']
-    app_id = data_list['app_id']
-    region = data_list['region']
-    location = data_list['location']
-    os_name = data_list['os']
-    zone = data_list['zone']
-    lifecycle = data_list['lifecycle']
-    role = data_list['role']
+    description = value['description']
+    app_id = value['app_id']
+    region = value['region']
+    location = value['location']
+    os_name = value['os']
+    zone = value['zone']
+    lifecycle = value['lifecycle']
+    role = value['role']
     region = get_region_abbreviations(region)
     location = get_location_abbreviations(location)
     os_name = get_os_name_abbreviations(os_name)
