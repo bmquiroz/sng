@@ -193,7 +193,7 @@ def insert_hostname(data_list):
     for key, value in data_list.items():
 
         description, app_id, region, location, os_name, zone, lifecycle, role, \
-          counter = get_values_for_hostname(data_list[value])
+          counter = get_values_for_hostname(value)
 
         hostname_string = region + location + os_name + zone + lifecycle + \
                       role + str(counter)
