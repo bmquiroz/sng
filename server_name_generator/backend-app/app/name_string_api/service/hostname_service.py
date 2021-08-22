@@ -29,7 +29,7 @@ def get_values_for_hostname(value):
     if counter:
         counter = '%05d' % (int(counter))
 
-    description = value['description']
+    description = value['description'][0]
     # value['description'] = description
     app_id = value['app_id']
     region = value['region']
