@@ -188,32 +188,43 @@ def get_role_abbreviations(role):
 
 def insert_hostname(data_list):
 
-    # hostname_d = {}
-    hostname_d = dict()
+    hostname_dict = dict()
 
-    # for obj in data_list:
-    # for key in data_list:
-    # for key in data_list['hostnames']:
     for key, value in data_list.items():
 
-        # description, app_id, region, location, os_name, zone, lifecycle, role, \
-        #   counter = get_values_for_hostname(data_list)
+        description, app_id, region, location, os_name, zone, lifecycle, role, \
+          counter = get_values_for_hostname(data_list[value])
 
-        # hostname_string = region + location + os_name + zone + lifecycle + \
-        #               role + str(counter)
+        hostname_string = region + location + os_name + zone + lifecycle + \
+                      role + str(counter)
 
-        # hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
+        hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
 
-        # db_util.db.session.add(hostname_data)
-        # db_util.db.session.commit()
-        # db_util.db.session.close()
+        db_util.db.session.add(hostname_data)
+        db_util.db.session.commit()
+        db_util.db.session.close()
 
-        # hostname_d.append(data_list[obj])
-        # hostname_d.update(key)
+        hostname_dict["hostnames"] = hostname_string
 
-        hostname_d["hostz"] = value
+    return hostname_dict
 
-    return hostname_d
+
+# def insert_hostname(data_list):
+
+#     # hostname_d = {}
+#     hostname_d = dict()
+
+#     # for obj in data_list:
+#     # for key in data_list:
+#     # for key in data_list['hostnames']:
+#     for key, value in data_list.items():
+
+#         # hostname_d.append(data_list[obj])
+#         # hostname_d.update(key)
+
+#         hostname_d["hostz"] = value
+
+#     return hostname_d
 
 
 # def insert_hostname(data_list):
