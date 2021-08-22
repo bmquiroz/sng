@@ -188,7 +188,8 @@ def get_role_abbreviations(role):
 
 def insert_hostname(data_list):
 
-    hostname_d ={}
+    # hostname_d = {}
+    hostname_d = dict()
 
     # for obj in data_list:
     for key in data_list:
