@@ -191,7 +191,7 @@ def insert_hostname(data_list):
     hostname_d ={}
 
     # for obj in data_list:
-    for obj in range(len(data_list)):
+    for key in data_list:
 
         # description, app_id, region, location, os_name, zone, lifecycle, role, \
         #   counter = get_values_for_hostname(data_list)
@@ -206,9 +206,34 @@ def insert_hostname(data_list):
         # db_util.db.session.close()
 
         # hostname_d.append(data_list[obj])
-        hostname_d[data_list]
+        hostname_d.update({key:len(key)})
 
     return hostname_d
+
+
+# def insert_hostname(data_list):
+
+#     hostname_d ={}
+
+#     # for obj in data_list:
+#     for obj in range(len(data_list)):
+
+#         # description, app_id, region, location, os_name, zone, lifecycle, role, \
+#         #   counter = get_values_for_hostname(data_list)
+
+#         # hostname_string = region + location + os_name + zone + lifecycle + \
+#         #               role + str(counter)
+
+#         # hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
+
+#         # db_util.db.session.add(hostname_data)
+#         # db_util.db.session.commit()
+#         # db_util.db.session.close()
+
+#         # hostname_d.append(data_list[obj])
+#         hostname_d[data_list]
+
+#     return hostname_d
 
 
 # def insert_hostname(data):
