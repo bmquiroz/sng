@@ -4,10 +4,9 @@ import name_string_api.database_utility as db_util
 import uuid 
 
 
-def validate_api_user(username, password):
+def validate_api_user(username):
     user = ApiUser.query.with_entities(ApiUser)\
         .filter_by(username=username)\
-        .filter_by(password=password)\
         .one_or_none()
     if user:
         return user.id

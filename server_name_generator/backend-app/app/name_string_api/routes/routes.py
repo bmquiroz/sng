@@ -133,20 +133,21 @@ def login():
 @app.route('/auth', methods=['GET', 'POST'])
 def login_api_user():
 
-   data = request.get_json(force=True)
-   username = data.get("username")
-   password = data.get("password")
+#    data = request.get_json(force=True)
+#    username = data.get("username")
+#    password = data.get("password")
 
    auth = request.authorization 
 
    if not auth or not auth.username or not auth.password:  
       return make_response('Could not verify', 401, {'WWW.Authentication': 'Basic realm: "Login required"'})
 
-   user = ApiUser.query.filter_by(username=auth.username).first()  
+   user = ApiUser.query.filter_by(username=auth.username).first()
+#    user = user_svc.validate_api_user(auth.username)
      
    if check_password_hash(user.password, auth.password):  
     #   token = jwt.encode({'public_id': user.public_id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
-      access_token = create_access_token(identity=username, expires_delta=False, )
+      access_token = create_access_token(identity=auth.username, expires_delta=False, )
       return jsonify({ "token": access_token })
     #   return jsonify({'token' : token.decode('UTF-8')}) 
 

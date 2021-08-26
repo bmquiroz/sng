@@ -65,8 +65,8 @@ def query_host():
 def create_sting():
     if request.method == 'POST':
         hostname_string = hostname_svc.insert_hostname(request.form)
-        response = make_response(jsonify({"hostname": [hostname_string]}), 200)
-        # response = make_response(jsonify({"hostname": hostname_string}), 200) jsonify([1,2,3])
+        response = make_response(jsonify({"hostname": hostname_string}), 200)
+        # response = make_response(jsonify({"hostname": [hostname_string]}), 200)
         response.headers.add('Access-Control-Allow-Origin', 'http://sng.home.redchip.net')
         return response
 
