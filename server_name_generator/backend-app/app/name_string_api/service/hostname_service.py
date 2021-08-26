@@ -30,7 +30,6 @@ def get_values_for_hostname(item):
         counter = '%05d' % (int(counter))
 
     description = item['description']
-    # value['description'] = description
     app_id = item['app_id']
     region = item['region']
     location = item['location']
@@ -47,48 +46,6 @@ def get_values_for_hostname(item):
 
     return description, app_id, region, location, os_name, zone, lifecycle, role,\
         counter
-
-
-# def get_values_for_hostname(data):
-#     """
-#     :param data: service_owner, region, location, os, lifecycle, role
-#     :return: abbreviated value of service_owner, region, location, os,
-#             lifecycle, role
-#     """
-#     try:
-#         hostname = HostName.query\
-#             .with_entities(HostName.counter)\
-#             .order_by(HostName.id.desc())\
-#             .first()
-#     except Exception as e:
-#         raise Exception('Failed to get hostname with error: ', e)
-
-#     if hostname:
-#         counter = hostname.counter
-#         counter = str(int(counter) + 1)
-#     else:
-#         counter = 0
-#         counter += 1
-#         counter = str(counter)
-#     if counter:
-#         counter = '%05d' % (int(counter))
-
-#     service_owner = data['service_owner']
-#     region = data['region']
-#     location = data['location']
-#     os_name = data['os']
-#     zone = data['zone']
-#     lifecycle = data['lifecycle']
-#     role = data['role']
-#     region = get_region_abbreviations(region)
-#     location = get_location_abbreviations(location)
-#     os_name = get_os_name_abbreviations(os_name)
-#     zone = get_zone_abbreviations(zone)
-#     lifecycle = get_lifecycle_abbreviations(lifecycle)
-#     role = get_role_abbreviations(role)
-
-#     return service_owner, region, location, os_name, zone, lifecycle, role,\
-#         counter
 
 
 def get_region_abbreviations(region):
@@ -231,6 +188,8 @@ def get_role_abbreviations(role):
 
 def insert_hostname(data):
 
+    hostname_list = []
+
     items = data['hostnames']
 
     for item in items:
@@ -247,85 +206,9 @@ def insert_hostname(data):
         db_util.db.session.commit()
         db_util.db.session.close()
 
-    return hostname_string
+        hostname_list.append(hostname_string)
 
-
-# def insert_hostname(data_list):
-
-#     hostname_dict = dict()
-
-#     for key, value in data_list.items():
-
-#         description, app_id, region, location, os_name, zone, lifecycle, role, \
-#           counter = get_values_for_hostname(value)
-
-#         hostname_string = region + location + os_name + zone + lifecycle + \
-#                       role + str(counter)
-
-#         hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
-
-#         db_util.db.session.add(hostname_data)
-#         db_util.db.session.commit()
-#         db_util.db.session.close()
-
-#         hostname_dict["hostnames"] = hostname_string
-
-#     return hostname_dict
-
-
-# def insert_hostname(data_list):
-
-#     # hostname_d = {}
-#     hostname_d = dict()
-
-#     # for obj in data_list:
-#     # for key in data_list:
-#     # for key in data_list['hostnames']:
-#     for key, value in data_list.items():
-
-#         # hostname_d.append(data_list[obj])
-#         # hostname_d.update(key)
-
-#         hostname_d["hostz"] = value
-
-#     return hostname_d
-
-
-# def insert_hostname(data_list):
-
-#     hostname_d ={}
-
-#     # for obj in data_list:
-#     for obj in range(len(data_list)):
-
-#         # description, app_id, region, location, os_name, zone, lifecycle, role, \
-#         #   counter = get_values_for_hostname(data_list)
-
-#         # hostname_string = region + location + os_name + zone + lifecycle + \
-#         #               role + str(counter)
-
-#         # hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
-
-#         # db_util.db.session.add(hostname_data)
-#         # db_util.db.session.commit()
-#         # db_util.db.session.close()
-
-#         # hostname_d.append(data_list[obj])
-#         hostname_d[data_list]
-
-#     return hostname_d
-
-
-# def insert_hostname(data):
-#     description, app_id, region, location, os_name, zone, lifecycle, role, \
-#         counter = get_values_for_hostname(data)
-#     hostname_string = region + location + os_name + zone + lifecycle + \
-#                       role + str(counter)
-#     hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
-#     db_util.db.session.add(hostname_data)
-#     db_util.db.session.commit()
-#     db_util.db.session.close()
-#     return hostname_string
+    return hostname_list
 
 
 def delete_hostname(host_id):
