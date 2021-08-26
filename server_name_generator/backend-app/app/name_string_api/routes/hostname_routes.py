@@ -16,7 +16,7 @@ app.config['JWT_TOKEN_LOCATION'] = ['headers', 'query_string']
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/api/get_hostnames', methods=['POST', 'GET'])
+@app.route('/get_hostnames', methods=['POST', 'GET'])
 @cross_origin()
 def get_hostnames():
     if request.method == 'POST':

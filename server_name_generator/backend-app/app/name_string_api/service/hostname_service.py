@@ -7,7 +7,7 @@ from flask import jsonify
 
 def get_values_for_hostname(item):
     """
-    :param vitem: description, app_id, region, location, os, lifecycle, role
+    :param item: description, app_id, region, location, os, lifecycle, role
     :return: abbreviated value of description, app_id, region, location, os,
             lifecycle, role
     """
