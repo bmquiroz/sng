@@ -5,9 +5,9 @@ import json
 from flask import jsonify
 
 
-def get_values_for_hostname(value):
+def get_values_for_hostname(item):
     """
-    :param value: description, app_id, region, location, os, lifecycle, role
+    :param vitem: description, app_id, region, location, os, lifecycle, role
     :return: abbreviated value of description, app_id, region, location, os,
             lifecycle, role
     """
@@ -29,15 +29,15 @@ def get_values_for_hostname(value):
     if counter:
         counter = '%05d' % (int(counter))
 
-    description = value['description'][0]
+    description = item['description']
     # value['description'] = description
-    app_id = value['app_id']
-    region = value['region']
-    location = value['location']
-    os_name = value['os']
-    zone = value['zone']
-    lifecycle = value['lifecycle']
-    role = value['role']
+    app_id = item['app_id']
+    region = item['region']
+    location = item['location']
+    os_name = item['os']
+    zone = item['zone']
+    lifecycle = item['lifecycle']
+    role = item['role']
     region = get_region_abbreviations(region)
     location = get_location_abbreviations(location)
     os_name = get_os_name_abbreviations(os_name)
@@ -229,14 +229,14 @@ def get_role_abbreviations(role):
     return role
 
 
-def insert_hostname(data_list):
+def insert_hostname(data):
 
-    hostname_dict = dict()
+    items = data['hostnames']
 
-    for key, value in data_list.items():
+    for item in items:
 
         description, app_id, region, location, os_name, zone, lifecycle, role, \
-          counter = get_values_for_hostname(value)
+          counter = get_values_for_hostname(item)
 
         hostname_string = region + location + os_name + zone + lifecycle + \
                       role + str(counter)
@@ -247,9 +247,30 @@ def insert_hostname(data_list):
         db_util.db.session.commit()
         db_util.db.session.close()
 
-        hostname_dict["hostnames"] = hostname_string
+    return hostname_string
 
-    return hostname_dict
+
+# def insert_hostname(data_list):
+
+#     hostname_dict = dict()
+
+#     for key, value in data_list.items():
+
+#         description, app_id, region, location, os_name, zone, lifecycle, role, \
+#           counter = get_values_for_hostname(value)
+
+#         hostname_string = region + location + os_name + zone + lifecycle + \
+#                       role + str(counter)
+
+#         hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
+
+#         db_util.db.session.add(hostname_data)
+#         db_util.db.session.commit()
+#         db_util.db.session.close()
+
+#         hostname_dict["hostnames"] = hostname_string
+
+#     return hostname_dict
 
 
 # def insert_hostname(data_list):
