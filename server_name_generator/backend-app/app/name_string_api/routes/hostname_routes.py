@@ -65,7 +65,8 @@ def query_host():
 def create_sting():
     if request.method == 'POST':
         hostname_string = hostname_svc.insert_hostname(request.form)
-        response = make_response(jsonify({"host_name": hostname_string}), 200)
+        response = make_response(jsonify({"hostname": [hostname_string]}), 200)
+        # response = make_response(jsonify({"hostname": hostname_string}), 200) jsonify([1,2,3])
         response.headers.add('Access-Control-Allow-Origin', 'http://sng.home.redchip.net')
         return response
 
@@ -75,46 +76,8 @@ def create_sting():
 def create_hostname():
     if request.method == 'POST':
         data = request.get_json(force=True)
-
         hostname_string = hostname_svc.insert_hostname(data)
-
         return {"hostname": hostname_string}
-
-
-# @app.route('/create_hostname', methods=['POST', 'GET'])
-# @jwt_required
-# def create_hostname():
-#     if request.method == 'POST':
-#         data_list = request.get_json(force=True)
-
-#         # data_list = {data}
-
-#         hostname_string = hostname_svc.insert_hostname(data_list)
-
-#         return {"hostname": hostname_string}
-
-
-# @app.route('/create_hostname', methods=['POST', 'GET'])
-# @jwt_required
-# def create_hostname():
-#     if request.method == 'POST':
-#         data = request.get_json(force=True)
-
-#         data_list = [data]
-
-#         hostname_string = hostname_svc.insert_hostname(data_list)
-
-#         return {"hostname": hostname_string}
-        
-
-# @app.route('/create_hostname', methods=['POST', 'GET'])
-# @jwt_required
-# def create_hostname():
-#     if request.method == 'POST':
-#         data = request.get_json(force=True)
-#         hostname_string = hostname_svc.insert_hostname(data)
-
-#         return {"hostname": hostname_string}
 
 
 @app.route('/query_ad/<hostname>', methods=['POST', 'GET'])
@@ -123,5 +86,4 @@ def query_ad(hostname):
     if request.method == 'POST':
         data = request.get_json(force=True)
         ldap_object_query = hostname_svc.query_hostname_ad(hostname)
-
         return ldap_object_query
