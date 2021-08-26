@@ -26,7 +26,7 @@ class ApiUser(UserMixin, db.Model):
     # public_id = db.Column(db.Integer)
     public_id = db.Column(db.String(50), unique=True)
     username = db.Column('USERNAME', db.String(50), nullable=False)
-    password = db.Column('PASSWORD', db.String(5), nullable=False)
+    password = db.Column('PASSWORD', db.String(50), nullable=False)
 
     def __init__(self, id, public_id=None, username=None, password=None):
         self.public_id = public_id
@@ -38,4 +38,5 @@ class ApiUser(UserMixin, db.Model):
             "id": self.id,
             "public_id": self.public_id,
             "username": self.username,
+            "password": self.password,
         }
