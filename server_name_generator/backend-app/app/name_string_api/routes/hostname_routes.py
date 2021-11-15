@@ -16,7 +16,7 @@ app.config['JWT_TOKEN_LOCATION'] = ['headers', 'query_string']
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/get_hostnames', methods=['POST', 'GET'])
+@app.route('/api/get_hostnames', methods=['POST', 'GET'])
 @cross_origin()
 def get_hostnames():
     if request.method == 'POST':
@@ -76,7 +76,7 @@ def create_sting():
 def create_hostname():
     if request.method == 'POST':
         data = request.get_json(force=True)
-        hostname_string = hostname_svc.insert_hostname(data)
+        hostname_string = hostname_svc.insert_hostname_api(data)
         return {"hostname": hostname_string}
 
 

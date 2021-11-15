@@ -188,6 +188,22 @@ def get_role_abbreviations(role):
 
 def insert_hostname(data):
 
+    description, app_id, region, location, os_name, zone, lifecycle, role, \
+        counter = get_values_for_hostname(data)
+
+    hostname_string = region + location + os_name + zone + lifecycle + \
+                      role + str(counter)
+
+    hostname_data = HostName(None, description, app_id, region, location, os_name, zone, lifecycle, role, counter)
+    db_util.db.session.add(hostname_data)
+    db_util.db.session.commit()
+    db_util.db.session.close()
+
+    return hostname_string
+
+
+def insert_hostname_api(data):
+
     hostname_list = []
 
     items = data['hostnames']
