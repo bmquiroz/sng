@@ -14,5 +14,5 @@ Flask-RESTful==0.3.6
 Flask-SQLAlchemy==2.3.2
 flask-ldap3-login==0.9.16
 Flask-Cors==3.0.9
-PyJWT==1.7.1
+PyJWT==2.4.0
 Flask-JWT-Extended==3.25.0
