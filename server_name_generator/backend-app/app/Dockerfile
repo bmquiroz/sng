@@ -31,6 +31,7 @@ ENV VIRTUAL_ENV=/home/sng/sng_api/venv
 RUN python3.7 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 COPY . /home/sng/sng_api
+RUN pip install greenlet==1.1.2
 RUN pip install -r requirements.txt
 
 # Install web services
